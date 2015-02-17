@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdenesViewDlg" widgetVar="OrdenesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewOrdenesTitle}">
+            <h:form id="OrdenesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ordenesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewOrdenesLabel_numeroOrden}"/>
+                        <h:outputText value="#{ordenesController.selected.numeroOrden}" title="#{bundle.ViewOrdenesTitle_numeroOrden}"/>
+                        <h:outputText value="#{bundle.ViewOrdenesLabel_estadocodigoEstado}"/>
+                        <h:outputText value="#{ordenesController.selected.estadocodigoEstado}" title="#{bundle.ViewOrdenesTitle_estadocodigoEstado}"/>
+                        <h:outputText value="#{bundle.ViewOrdenesLabel_tecnicocodigoTecnico}"/>
+                        <h:outputText value="#{ordenesController.selected.tecnicocodigoTecnico}" title="#{bundle.ViewOrdenesTitle_tecnicocodigoTecnico}"/>
+                        <h:outputText value="#{bundle.ViewOrdenesLabel_tipoOrdenescodigoTipo}"/>
+                        <h:outputText value="#{ordenesController.selected.tipoOrdenescodigoTipo}" title="#{bundle.ViewOrdenesTitle_tipoOrdenescodigoTipo}"/>
+                        <h:outputText value="#{bundle.ViewOrdenesLabel_clienteEmpresacodigoNIC}"/>
+                        <h:outputText value="#{ordenesController.selected.clienteEmpresacodigoNIC}" title="#{bundle.ViewOrdenesTitle_clienteEmpresacodigoNIC}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="OrdenesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

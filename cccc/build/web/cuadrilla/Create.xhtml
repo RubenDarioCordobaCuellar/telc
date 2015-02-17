@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CuadrillaCreateDlg" widgetVar="CuadrillaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCuadrillaTitle}">
+            <h:form id="CuadrillaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cuadrillaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCuadrillaLabel_codigoCuadrilla}" for="codigoCuadrilla" />
+                        <p:inputText id="codigoCuadrilla" value="#{cuadrillaController.selected.codigoCuadrilla}" title="#{bundle.CreateCuadrillaTitle_codigoCuadrilla}" required="true" requiredMessage="#{bundle.CreateCuadrillaRequiredMessage_codigoCuadrilla}"/>
+                        <p:outputLabel value="#{bundle.CreateCuadrillaLabel_nombreCuadrilla}" for="nombreCuadrilla" />
+                        <p:inputText id="nombreCuadrilla" value="#{cuadrillaController.selected.nombreCuadrilla}" title="#{bundle.CreateCuadrillaTitle_nombreCuadrilla}" required="true" requiredMessage="#{bundle.CreateCuadrillaRequiredMessage_nombreCuadrilla}"/>
+                        <p:outputLabel value="#{bundle.CreateCuadrillaLabel_vehiculocodigoVehiculo}" for="vehiculocodigoVehiculo" />
+                        <p:selectOneMenu id="vehiculocodigoVehiculo" value="#{cuadrillaController.selected.vehiculocodigoVehiculo}" required="true" requiredMessage="#{bundle.EditCuadrillaRequiredMessage_vehiculocodigoVehiculo}">
+                            <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
+                                           var="vehiculocodigoVehiculoItem"
+                                           itemValue="#{vehiculocodigoVehiculoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cuadrillaController.create}" value="#{bundle.Save}" update="display,:CuadrillaListForm:datalist,:growl" oncomplete="handleSubmit(args,'CuadrillaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CuadrillaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

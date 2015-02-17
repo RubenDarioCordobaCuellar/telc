@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdenesCreateDlg" widgetVar="OrdenesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateOrdenesTitle}">
+            <h:form id="OrdenesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ordenesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateOrdenesLabel_numeroOrden}" for="numeroOrden" />
+                        <p:inputText id="numeroOrden" value="#{ordenesController.selected.numeroOrden}" title="#{bundle.CreateOrdenesTitle_numeroOrden}" required="true" requiredMessage="#{bundle.CreateOrdenesRequiredMessage_numeroOrden}"/>
+                        <p:outputLabel value="#{bundle.CreateOrdenesLabel_estadocodigoEstado}" for="estadocodigoEstado" />
+                        <p:selectOneMenu id="estadocodigoEstado" value="#{ordenesController.selected.estadocodigoEstado}" required="true" requiredMessage="#{bundle.EditOrdenesRequiredMessage_estadocodigoEstado}">
+                            <f:selectItems value="#{estadoController.itemsAvailableSelectOne}"
+                                           var="estadocodigoEstadoItem"
+                                           itemValue="#{estadocodigoEstadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateOrdenesLabel_tecnicocodigoTecnico}" for="tecnicocodigoTecnico" />
+                        <p:selectOneMenu id="tecnicocodigoTecnico" value="#{ordenesController.selected.tecnicocodigoTecnico}" required="true" requiredMessage="#{bundle.EditOrdenesRequiredMessage_tecnicocodigoTecnico}">
+                            <f:selectItems value="#{tecnicoController.itemsAvailableSelectOne}"
+                                           var="tecnicocodigoTecnicoItem"
+                                           itemValue="#{tecnicocodigoTecnicoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateOrdenesLabel_tipoOrdenescodigoTipo}" for="tipoOrdenescodigoTipo" />
+                        <p:selectOneMenu id="tipoOrdenescodigoTipo" value="#{ordenesController.selected.tipoOrdenescodigoTipo}" required="true" requiredMessage="#{bundle.EditOrdenesRequiredMessage_tipoOrdenescodigoTipo}">
+                            <f:selectItems value="#{tipoordenesController.itemsAvailableSelectOne}"
+                                           var="tipoOrdenescodigoTipoItem"
+                                           itemValue="#{tipoOrdenescodigoTipoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateOrdenesLabel_clienteEmpresacodigoNIC}" for="clienteEmpresacodigoNIC" />
+                        <p:selectOneMenu id="clienteEmpresacodigoNIC" value="#{ordenesController.selected.clienteEmpresacodigoNIC}" required="true" requiredMessage="#{bundle.EditOrdenesRequiredMessage_clienteEmpresacodigoNIC}">
+                            <f:selectItems value="#{clienteempresaController.itemsAvailableSelectOne}"
+                                           var="clienteEmpresacodigoNICItem"
+                                           itemValue="#{clienteEmpresacodigoNICItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ordenesController.create}" value="#{bundle.Save}" update="display,:OrdenesListForm:datalist,:growl" oncomplete="handleSubmit(args,'OrdenesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OrdenesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

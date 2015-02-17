@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClienteempresaEditDlg" widgetVar="ClienteempresaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditClienteempresaTitle}">
+            <h:form id="ClienteempresaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clienteempresaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditClienteempresaLabel_codigoNIC}" for="codigoNIC" />
+                        <p:inputText id="codigoNIC" value="#{clienteempresaController.selected.codigoNIC}" title="#{bundle.EditClienteempresaTitle_codigoNIC}" required="true" requiredMessage="#{bundle.EditClienteempresaRequiredMessage_codigoNIC}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{clienteempresaController.update}" value="#{bundle.Save}" update="display,:ClienteempresaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClienteempresaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ClienteempresaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

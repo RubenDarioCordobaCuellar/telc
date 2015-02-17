@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CorregimientoCreateDlg" widgetVar="CorregimientoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCorregimientoTitle}">
+            <h:form id="CorregimientoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{corregimientoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCorregimientoLabel_codigoMunicipio}" for="codigoMunicipio" />
+                        <p:inputText id="codigoMunicipio" value="#{corregimientoController.selected.codigoMunicipio}" title="#{bundle.CreateCorregimientoTitle_codigoMunicipio}" required="true" requiredMessage="#{bundle.CreateCorregimientoRequiredMessage_codigoMunicipio}"/>
+                        <p:outputLabel value="#{bundle.CreateCorregimientoLabel_nombreMunicipio}" for="nombreMunicipio" />
+                        <p:inputText id="nombreMunicipio" value="#{corregimientoController.selected.nombreMunicipio}" title="#{bundle.CreateCorregimientoTitle_nombreMunicipio}" required="true" requiredMessage="#{bundle.CreateCorregimientoRequiredMessage_nombreMunicipio}"/>
+                        <p:outputLabel value="#{bundle.CreateCorregimientoLabel_municipioCiudadcodigoMunicipio}" for="municipioCiudadcodigoMunicipio" />
+                        <p:selectOneMenu id="municipioCiudadcodigoMunicipio" value="#{corregimientoController.selected.municipioCiudadcodigoMunicipio}" required="true" requiredMessage="#{bundle.EditCorregimientoRequiredMessage_municipioCiudadcodigoMunicipio}">
+                            <f:selectItems value="#{municipioCiudadController.itemsAvailableSelectOne}"
+                                           var="municipioCiudadcodigoMunicipioItem"
+                                           itemValue="#{municipioCiudadcodigoMunicipioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{corregimientoController.create}" value="#{bundle.Save}" update="display,:CorregimientoListForm:datalist,:growl" oncomplete="handleSubmit(args,'CorregimientoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CorregimientoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

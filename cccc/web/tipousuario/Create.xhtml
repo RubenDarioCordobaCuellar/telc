@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipousuarioCreateDlg" widgetVar="TipousuarioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTipousuarioTitle}">
+            <h:form id="TipousuarioCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipousuarioController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTipousuarioLabel_codigoTipoUsuario}" for="codigoTipoUsuario" />
+                        <p:inputText id="codigoTipoUsuario" value="#{tipousuarioController.selected.codigoTipoUsuario}" title="#{bundle.CreateTipousuarioTitle_codigoTipoUsuario}" required="true" requiredMessage="#{bundle.CreateTipousuarioRequiredMessage_codigoTipoUsuario}"/>
+                        <p:outputLabel value="#{bundle.CreateTipousuarioLabel_tipoUsuario}" for="tipoUsuario" />
+                        <p:inputText id="tipoUsuario" value="#{tipousuarioController.selected.tipoUsuario}" title="#{bundle.CreateTipousuarioTitle_tipoUsuario}" required="true" requiredMessage="#{bundle.CreateTipousuarioRequiredMessage_tipoUsuario}"/>
+                        <p:outputLabel value="#{bundle.CreateTipousuarioLabel_personaCedula}" for="personaCedula" />
+                        <p:selectOneMenu id="personaCedula" value="#{tipousuarioController.selected.personaCedula}" required="true" requiredMessage="#{bundle.EditTipousuarioRequiredMessage_personaCedula}">
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="personaCedulaItem"
+                                           itemValue="#{personaCedulaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTipousuarioLabel_rolcodigoRol}" for="rolcodigoRol" />
+                        <p:selectOneMenu id="rolcodigoRol" value="#{tipousuarioController.selected.rolcodigoRol}" required="true" requiredMessage="#{bundle.EditTipousuarioRequiredMessage_rolcodigoRol}">
+                            <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
+                                           var="rolcodigoRolItem"
+                                           itemValue="#{rolcodigoRolItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipousuarioController.create}" value="#{bundle.Save}" update="display,:TipousuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipousuarioCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TipousuarioCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

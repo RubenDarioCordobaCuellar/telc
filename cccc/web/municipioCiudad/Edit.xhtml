@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MunicipioCiudadEditDlg" widgetVar="MunicipioCiudadEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMunicipioCiudadTitle}">
+            <h:form id="MunicipioCiudadEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{municipioCiudadController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMunicipioCiudadLabel_codigoMunicipio}" for="codigoMunicipio" />
+                        <p:inputText id="codigoMunicipio" value="#{municipioCiudadController.selected.codigoMunicipio}" title="#{bundle.EditMunicipioCiudadTitle_codigoMunicipio}" required="true" requiredMessage="#{bundle.EditMunicipioCiudadRequiredMessage_codigoMunicipio}"/>
+                        <p:outputLabel value="#{bundle.EditMunicipioCiudadLabel_nombreMunicipio}" for="nombreMunicipio" />
+                        <p:inputText id="nombreMunicipio" value="#{municipioCiudadController.selected.nombreMunicipio}" title="#{bundle.EditMunicipioCiudadTitle_nombreMunicipio}" required="true" requiredMessage="#{bundle.EditMunicipioCiudadRequiredMessage_nombreMunicipio}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{municipioCiudadController.update}" value="#{bundle.Save}" update="display,:MunicipioCiudadListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MunicipioCiudadEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MunicipioCiudadEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

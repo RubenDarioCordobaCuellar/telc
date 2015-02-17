@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SectorCreateDlg" widgetVar="SectorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSectorTitle}">
+            <h:form id="SectorCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sectorController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSectorLabel_codigoSector}" for="codigoSector" />
+                        <p:inputText id="codigoSector" value="#{sectorController.selected.codigoSector}" title="#{bundle.CreateSectorTitle_codigoSector}" required="true" requiredMessage="#{bundle.CreateSectorRequiredMessage_codigoSector}"/>
+                        <p:outputLabel value="#{bundle.CreateSectorLabel_nombreSector}" for="nombreSector" />
+                        <p:inputText id="nombreSector" value="#{sectorController.selected.nombreSector}" title="#{bundle.CreateSectorTitle_nombreSector}" required="true" requiredMessage="#{bundle.CreateSectorRequiredMessage_nombreSector}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sectorController.create}" value="#{bundle.Save}" update="display,:SectorListForm:datalist,:growl" oncomplete="handleSubmit(args,'SectorCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SectorCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

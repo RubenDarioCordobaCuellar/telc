@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoordenesCreateDlg" widgetVar="TipoordenesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTipoordenesTitle}">
+            <h:form id="TipoordenesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipoordenesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTipoordenesLabel_codigoTipo}" for="codigoTipo" />
+                        <p:inputText id="codigoTipo" value="#{tipoordenesController.selected.codigoTipo}" title="#{bundle.CreateTipoordenesTitle_codigoTipo}" required="true" requiredMessage="#{bundle.CreateTipoordenesRequiredMessage_codigoTipo}"/>
+                        <p:outputLabel value="#{bundle.CreateTipoordenesLabel_tipoOrden}" for="tipoOrden" />
+                        <p:inputText id="tipoOrden" value="#{tipoordenesController.selected.tipoOrden}" title="#{bundle.CreateTipoordenesTitle_tipoOrden}" required="true" requiredMessage="#{bundle.CreateTipoordenesRequiredMessage_tipoOrden}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoordenesController.create}" value="#{bundle.Save}" update="display,:TipoordenesListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoordenesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TipoordenesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

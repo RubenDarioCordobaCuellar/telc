@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VeredaBarrioEditDlg" widgetVar="VeredaBarrioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVeredaBarrioTitle}">
+            <h:form id="VeredaBarrioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{veredaBarrioController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditVeredaBarrioLabel_codigoVereda}" for="codigoVereda" />
+                        <p:inputText id="codigoVereda" value="#{veredaBarrioController.selected.codigoVereda}" title="#{bundle.EditVeredaBarrioTitle_codigoVereda}" required="true" requiredMessage="#{bundle.EditVeredaBarrioRequiredMessage_codigoVereda}"/>
+                        <p:outputLabel value="#{bundle.EditVeredaBarrioLabel_nombreVereda}" for="nombreVereda" />
+                        <p:inputText id="nombreVereda" value="#{veredaBarrioController.selected.nombreVereda}" title="#{bundle.EditVeredaBarrioTitle_nombreVereda}" required="true" requiredMessage="#{bundle.EditVeredaBarrioRequiredMessage_nombreVereda}"/>
+                        <p:outputLabel value="#{bundle.EditVeredaBarrioLabel_corregimientocodigoMunicipio}" for="corregimientocodigoMunicipio" />
+                        <p:selectOneMenu id="corregimientocodigoMunicipio" value="#{veredaBarrioController.selected.corregimientocodigoMunicipio}" required="true" requiredMessage="#{bundle.EditVeredaBarrioRequiredMessage_corregimientocodigoMunicipio}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{corregimientoController.itemsAvailableSelectOne}"
+                                           var="corregimientocodigoMunicipioItem"
+                                           itemValue="#{corregimientocodigoMunicipioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{veredaBarrioController.update}" value="#{bundle.Save}" update="display,:VeredaBarrioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VeredaBarrioEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VeredaBarrioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

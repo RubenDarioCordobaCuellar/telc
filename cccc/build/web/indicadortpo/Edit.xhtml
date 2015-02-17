@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IndicadortpoEditDlg" widgetVar="IndicadortpoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditIndicadortpoTitle}">
+            <h:form id="IndicadortpoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{indicadortpoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditIndicadortpoLabel_codigoIndicador}" for="codigoIndicador" />
+                        <p:inputText id="codigoIndicador" value="#{indicadortpoController.selected.codigoIndicador}" title="#{bundle.EditIndicadortpoTitle_codigoIndicador}" required="true" requiredMessage="#{bundle.EditIndicadortpoRequiredMessage_codigoIndicador}"/>
+                        <p:outputLabel value="#{bundle.EditIndicadortpoLabel_nombreIndicador}" for="nombreIndicador" />
+                        <p:inputText id="nombreIndicador" value="#{indicadortpoController.selected.nombreIndicador}" title="#{bundle.EditIndicadortpoTitle_nombreIndicador}" required="true" requiredMessage="#{bundle.EditIndicadortpoRequiredMessage_nombreIndicador}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{indicadortpoController.update}" value="#{bundle.Save}" update="display,:IndicadortpoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IndicadortpoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IndicadortpoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

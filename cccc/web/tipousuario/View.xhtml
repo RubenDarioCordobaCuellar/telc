@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipousuarioViewDlg" widgetVar="TipousuarioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTipousuarioTitle}">
+            <h:form id="TipousuarioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipousuarioController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTipousuarioLabel_codigoTipoUsuario}"/>
+                        <h:outputText value="#{tipousuarioController.selected.codigoTipoUsuario}" title="#{bundle.ViewTipousuarioTitle_codigoTipoUsuario}"/>
+                        <h:outputText value="#{bundle.ViewTipousuarioLabel_tipoUsuario}"/>
+                        <h:outputText value="#{tipousuarioController.selected.tipoUsuario}" title="#{bundle.ViewTipousuarioTitle_tipoUsuario}"/>
+                        <h:outputText value="#{bundle.ViewTipousuarioLabel_personaCedula}"/>
+                        <h:outputText value="#{tipousuarioController.selected.personaCedula}" title="#{bundle.ViewTipousuarioTitle_personaCedula}"/>
+                        <h:outputText value="#{bundle.ViewTipousuarioLabel_rolcodigoRol}"/>
+                        <h:outputText value="#{tipousuarioController.selected.rolcodigoRol}" title="#{bundle.ViewTipousuarioTitle_rolcodigoRol}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TipousuarioViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
